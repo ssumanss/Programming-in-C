@@ -1,0 +1,524 @@
+\chapter{Congruence}
+A system of $n$ linear equations in $n$ unknowns $x$ is often symbolized:
+\begin{displaymath}
+A{\bf x}={\bf b}
+\end{displaymath}
+or by:
+\begin{displaymath}
+  \sum_{1\leq j \leq n} a_{i,j} x_j = b_i, {\text{ for }} i = 1, ..., n
+\end{displaymath}
+or more elaborately by:
+\begin{displaymath}
+\begin{array}{llllll}
+a_{1,1} x_1 & a_{1,2} x_2 & ... &a_{1,n} x_n&   =  & b_1 \\
+a_{2,1} x_1 & a_{2,2} x_2 & ... &a_{2,n} x_n&   =  & b_2 \\
+... & ... & \ddots &...&   =  & ... \\\\
+a_{n,1} x_1 & a_{n,2} x_2 & ... &a_{n,n} x_n&   =  & b_n \\
+\end{array}
+\end{displaymath}
+
+For convenience, we use the name $a_{i,j}$ to refer to the coefficient of $x_j$ in equation $i$. 
+Similarly, $b_i$ is the right hand side of the equation $i$.  
+
+The task of solving a linear system involves determining values of the unknowns $x_1, x_2, .., x_n$ so that 
+all $n$ equations are correct.
+
+\section{General Properties}
+\paragraph{Systems of linear equations and linear transformations.}
+We've seen how a system of $m$ linear equations in $n$ unknowns can be interpreted as a single matrix equation $A{\bf x}={\bf b}$, where ${\bf x}$ is the $n\times1$ column vector whose entries are the $n$ unknowns, and $\bf b$ is the $m\times1$ column vector of constants on the right sides of the $m$ equations.
+
+We can also interpret a system of linear equations in terms of a linear transformation.  Let the linear transformation $T:\mathbb{R}^n\to\mathbb{R}^m$ correspond to the matrix $A$, that is, $T({\bf x})=A{\bf x}$.  Then the matrix equation $A{\bf x}={\bf b}$ becomes
+$$T({\bf x})={\bf b}.$$
+
+Solving the equation means looking for a vector ${\bf x}$ in the inverse image
+$T^{-1}({\bf b})$.  It will exist if and only if ${\bf b}$ is in the image $T(V)$.
+
+When the system of linear equations is homogeneous, then ${\bf b}={\bf 0}$.  Then the solution set is the subspace of $V$ we've called the kernel of $T$.  Thus, kernels are solutions to homogeneous linear equations.
+
+When the system is not homogeneous, then the solution set is not a subspace of $V$ since it doesn't contain $\bf 0$.  In fact, it will be empty when $\bf b$ is not in the image of $T$.  If it is in the image, however, there is at least one solution ${\bf a}\in V$ with $T({\bf a})={\bf b}$.  All the rest  can be found from $\bf a$ by adding solutions $\bf x$ of the associated homogeneous equations, that is, 
+$$T({\bf a}+{\bf x})={\bf b}\quad\mbox{ iff }\quad T({\bf x})={\bf 0}.$$
+Geometrically, the solution set is a translate of the kernel of $T$, which is a subspace of $V$, by the vector $\bf a$.
+
+\begin{example}
+Consider this nonhomogeneous linear system $A{\bf x}={\bf b}$:
+$$\begin{bmatrix}
+2&0&1\\
+1&1&3
+\end{bmatrix}
+\begin{bmatrix}x\\y\\z\end{bmatrix}
+=
+\begin{bmatrix}1\\2\end{bmatrix}
+$$
+Solve it by row reducing the augmented matrix
+$$\left[\begin{array}{rrr|r}
+2&0&1&1\\
+1&1&3&2
+\end{array}\right]$$
+to
+$$\left[\begin{array}{rrr|r}
+1&0&1/2&1/2\\
+0&1&5/2&3/2
+\end{array}\right]$$
+Then $z$ can be chosen freely, and $x$ and $y$ determined from $z$, that is,
+$${\bf x}=
+\begin{bmatrix}x\\y\\z\end{bmatrix}
+=
+\begin{bmatrix}
+{1\over2}-{1\over2}z\\
+{3\over2}-{5\over2}z\\
+z
+\end{bmatrix}
+=
+\begin{bmatrix}
+{1\over2}\\
+{3\over2}\\
+0
+\end{bmatrix}
++
+\begin{bmatrix}
+-{1\over2}\\
+-{5\over2}\\
+1
+\end{bmatrix}z
+$$
+This last equation is the parametric equation of a line in $\mathbb{R}^3$, that is to say, the solution set is a line.  But it's not a line through the origin. There is, however, a line through the origin, namely
+$${\bf x}=
+\begin{bmatrix}x\\y\\z\end{bmatrix}
+=
+\begin{bmatrix}
+-{1\over2}\\
+-{5\over2}\\
+1
+\end{bmatrix}z
+$$
+and that line is the solution space of the associated homogeneous system
+$A{\bf x}={\bf 0}$.  Furthermore, these two lines are parallel, and the vector
+$\displaystyle\begin{bmatrix}
+1/2\\
+3/2\\
+0
+\end{bmatrix}$ 
+shifts the line through the origin to the other line.
+In summary, for this example, the solution set for the nonhomogeneous
+equation $A{\bf x}={\bf b}$ is a line in $\R^3$ parallel to the solution
+space for the homogeneous equation $A{\bf x}={\bf 0}$.
+\end{example}
+
+In general, the solution set for the nonhomogeneous
+equation $A{\bf x}={\bf b}$ won't be a one-dimensional line.  It's dimension
+will be the nullity of $A$, and it will be parallel to the solution space of the
+associated homogeneous equation $A{\bf x}={\bf 0}$.
+
+\paragraph{The dimension theorem.} 
+
+The rank and nullity of a transformation are related.  Specifically, their sum is the dimension of the domain of the transformation.  That equation is sometimes called the dimension theorem.
+
+In terms of matrices, this connection can be stated as the rank of a matrix plus its nullity  equals the number of rows of the matrix.
+
+Before we prove the Dimension Theorem, first we'll find a characterization of the image of a transformation.
+
+\begin{theorem}
+The image of a transformation is spanned by the image of the any basis of its domain.  For $T:V\to W$, if $\beta=\{{\bf b}_1,{\bf b_2},\ldots,{\bf b_n}\}$ is a basis of $V$, then
+$T(\beta)=\{T({\bf b}_1),T({\bf b_2}),\ldots,T({\bf b_n})\}$ spans the image of $T$.
+\end{theorem}
+
+Although $T(\beta)$ spans the image, it needn't be a basis because its vectors needn't be independent.
+
+\begin{proof}
+A vector in the image of $T$ is of the form $T({\bf v})$ where ${\bf v}\in V$.  But $\beta$ is a basis of $V$, so $\bf v$ is a linear combination of the basis vectors $\{{\bf b}_1,\ldots,{\bf b_n}\}$.  Therefore,
+$T({\bf v})$ is same linear combination of the vectors $T({\bf b}_1),\ldots,T({\bf b_n})$.  Therefore, every vector in the image of $T$ is a linear combination of vectors in $T(\beta)$.
+\end{proof}
+
+\begin{theorem}[Dimension Theorem]
+If the domain of a linear transformation is finite dimensional, then that dimension is the sum of the rank and nullity of the transformation.
+\end{theorem}
+
+\begin{proof}
+Let $T:V\to W$ be a linear transformation, let $n$ be the dimension of $V$, let $r$ be the rank of $T$ and $k$ the nullity of $T$.  We'll show $n=r+k$.
+
+Let $\beta=\{{\bf b}_1,\ldots,{\bf b}_k\}$ be a basis of the kernel of $T$.  This basis can be extended to a basis $\gamma=\{{\bf b}_1,\ldots,{\bf b}_k,\dots,{\bf b}_n\}$ of all of $V$.  We'll show that the image of the vectors we appended, 
+$$C=\{T({\bf b}_{k+1}),\dots,T({\bf b}_n)\}$$ 
+is a basis of $T(V)$.  That will show that $r=n-k$ as required.
+
+First, we need to show that the set $C$ spans the image $T(V)$.  From the previous theorem, we know that $T(\gamma)$ spans $T(V)$.  But all the vectors in $T(\beta)$ are $\bf 0$, so they don't help in spanning $T(V)$.  That leaves $C=T(\gamma)-T(\beta)$ to span $T(V)$.
+
+Next, we need to show that the vectors in $C$ are linearly independent.  Suppose that $\bf0$ is a linear combination of them,
+$$c_{k+1}T({\bf b}_{k+1})+\cdots+c_{n}T({\bf b}_{n})={\bf 0}$$
+where the $c_i$'s are scalars.  Then
+$$T(c_{k+1}{\bf b}_{k+1}+\cdots+b_{n}{\bf v}_{n})={\bf 0}$$
+Therefore, 
+${\bf v}=c_{k+1}{\bf b}_{k+1}+\cdots+c_{n}{\bf b}_{n}$
+lies in the kernel of $T$.
+Therefore, $\bf v$ is a linear combination of the basis vectors $\beta$, 
+${\bf v}=c_{0}{\bf b}_{0}+\cdots+c_{k}{\bf b}_{k}.$
+These last two equations imply that $\bf 0$ is a linear combination of the entire basis $\gamma$ of $V$,
+$$c_{0}{\bf b}_{0}+\cdots+c_{k}{\bf b}_{k}-c_{k+1}{\bf b}_{k+1}-\cdots-c_{n}{\bf b}_{n}={\bf0}.$$
+Therefore, all the coefficients $c_i$ are 0.  Therefore, the vectors in $C$ are linearly independent.
+
+Thus, $C$ is a basis of the image of $T$.
+\end{proof}
+
+There are several results that follow from this Dimension Theorem.
+
+\paragraph{Characterization of one-to-one transformations.}  Recall that a function $f$ is said to be a {\em one-to-one} function if whenever $x\neq y$ then $f(x)\neq f(y)$.  That applies to transformations as well.  $T:V\to W$ is one-to-one when ${\bf u}\neq {\bf v}$ implies $T({\bf u})\neq T({\bf v})$.  An alternate term for one-to-one is {\em injective}, and yet another term that's often used for transformations is {\em monomorphism}.
+
+Which transformations are one-to-one can be determined by their kernels.
+
+\begin{theorem}
+A transformation is one-to-one if and only if its kernel is trivial, that is, its nullity is 0.
+\end{theorem}
+
+\begin{proof}
+Let $T:V\to W$.  Suppose that $T$ is one-to-one.  Then since $T({\bf 0})={\bf 0}$, therefore $T$ can send no other vector to $\bf 0$.  Thus, the kernel of $T$ consists of $\bf 0$ alone. That's a 0-dimensional space, so the nullity of $T$ is 0.
+
+Conversely, suppose that the nullity of $T$ is 0, that is, its kernel consists only of $\bf 0$.  We'll show $T$ is one-to-one.  Suppose that ${\bf u}\neq {\bf v}$.  Then ${\bf u}-{\bf v}\neq{\bf 0}$.  Then ${\bf u}-{\bf v}\neq{\bf 0}$ does not lie in the kernel of $T$ which means that $T({\bf u}-{\bf v})\neq0$.  But $T({\bf u}-{\bf v})=T({\bf u})-T({\bf v})$, therefore $T({\bf u})\neq T({\bf v})$.  Thus, $T$ is one-to-one.
+\end{proof}
+
+Since the rank plus the nullity of a transformation equals the dimension of its domain, $r+k=n$, we have the following corollary.
+
+\begin{corollary}
+For a transformation $T$ whose domain is finite dimensional, $T$ is one-to-one if and only if that dimension equals its rank.
+\end{corollary}
+
+\paragraph{Characterization of isomorphisms.}
+If two vector spaces $V$ and $W$ are isomorphic, their properties with respect to addition and scalar multiplication will be the same.  A subset of $V$ will span $V$ if and only if its image in $W$ spans $W$.  It's independent in $V$ if and only if its image is independent in $W$.  Therefore, an isomorphism sends any basis of the first to a basis of the second. And that means
+
+\begin{theorem}
+Isomorphic vector spaces have the same dimension.
+\end{theorem}
+
+We'll be interested in which linear transformations are isomorphisms.  The Dimension Theorem gives us some criteria for that.
+
+\begin{theorem}
+Let $T:V\to W$ be a linear transformation be a transformation between two vector spaces of the same dimension.  Then the following statements are equivalent.
+
+(1) $T$ is an isomorphism.
+
+(2) $T$ is one-to-one.
+
+(3) The nullity of $T$ is 0, that is, its kernel is trivial.
+
+(4) $T$ is onto, that is, the image of $T$ is $W$.
+
+(5) The rank of $T$ is the same as the dimension of the vector spaces.
+\end{theorem}
+
+\begin{proof}
+(2) and (3) are equivalent by a previous theorem.  (4) and (5) are equivalent by the definition of rank.  Since $n=r+k$, (3) is equivalent to (5).  (1) is equivalent to the conjunction of (2) and (3), but they're equivalent to each other, so they're equivalent to (1).
+\end{proof}
+
+\section{Gaussian Elimination}
+In previous classes we have seen many method of solving system of linear equation. $i.e.,$
+\begin{enumerate}[i.]
+    \item Hit and Trial Method
+    \item Substitution Method
+    \item Elimination 
+    \item Cramer's Rule
+\end{enumerate}
+Gaussian elimination is a prominent method to solve any system of linear equation. 
+
+\subsection*{Step 1: Write out the \emph{augmented matrix}}
+
+A system of linear equation is generally of the form
+\begin{align}
+  A \x = \bb \label{eq-linear}
+\end{align}
+where $A \in M(n \times m)$ and $\bb \in \R^n$ are given, and $\x=(x_1,\dots, x_m)^T$ is the vector of unknowns.  For example, the system
+\begin{align*}
+  x_2 + 2 \, x_3 - x_4 & = 1 \\
+  x_1 + x_3 + x_4 & = 4 \\
+  -x_1 + x_2 - x_4 & = 2 \\
+  2 \, x_2 + 3 \, x_3 - x_4 & = 7
+\end{align*}
+can be written in the form \ref{eq-linear} with
+\begin{equation*}
+  A = 
+  \begin{pmatrix}
+  0 & 1 & 2 & -1 \\
+  1 & 0 & 1 & 1 \\
+  -1 & 1 & 0 & -1 \\
+  0 & 2 & 3 & -1
+  \end{pmatrix} \,,
+  \qquad \bb =
+  \begin{pmatrix}
+  1 \\ 4 \\ 2 \\ 7 
+  \end{pmatrix} \,.
+\end{equation*}
+To simplify notation, we write $A$ and $\bb $ into a single
+\emph{augmented matrix},
+\begin{equation}
+  M = \left(
+  \begin{matrix}
+  0 & 1 & 2 & -1 \\
+  1 & 0 & 1 & 1 \\
+  -1 & 1 & 0 & -1 \\
+  0 & 2 & 3 & -1
+  \end{matrix}
+  \right.\left|\left.
+  \begin{matrix}
+  1 \\ 4 \\ 2 \\ 7 
+  \end{matrix}
+  \right)\right. \,.
+  \label{e.m}
+\end{equation}
+
+\subsection*{Step 2: Bring $M$ into \emph{reduced row echelon form}}
+
+The goal of this step is to bring the augmented matrix into
+\emph{reduced row echelon form}.  A matrix is in this form if
+\begin{itemize}
+\item the first non-zero entry of each row is $1$, this element is
+referred to as the \emph{pivot},
+\item each pivot is the only non-zero entry in its column,
+\item each row has at least as many leading zeros as the previous
+row. 
+\end{itemize}
+For example, the following matrix is in row echelon form, where $*$
+could be any, possibly non-zero, number:
+\begin{equation*}
+  \begin{pmatrix}
+  0 & 1 & * & 0 & * & * & 0 \\
+  0 & 0 & 0 & 1 & * & * & 0 \\
+  0 & 0 & 0 & 0 & 0 & 0 & 1 \\
+  0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+  \end{pmatrix}
+\end{equation*}
+Three types of \emph{elementary row operations} are permitted in this
+process, namely
+\begin{itemize}
+\item[(A)] exchanging two rows of $M$,
+\item[(B)] multiplying a row by a non-zero scalar,
+\item[(C)] adding a multiple of one row to another row.
+\end{itemize}
+As an example, we row-reduce the augmented matrix \eqref{e.m}:
+\begin{align*}
+  & \left(
+  \begin{matrix}
+  0 & 1 & 2 & -1 \\
+  1 & 0 & 1 & 1 \\
+  -1 & 1 & 0 & -1 \\
+  0 & 2 & 3 & -1
+  \end{matrix}
+  \right.\left|\left.
+  \begin{matrix}
+  1 \\ 4 \\ 2 \\ 7 
+  \end{matrix}
+  \right)\right. 
+  \xrightarrow{\text{reorder rows}}
+  \left(
+  \begin{matrix}
+  1 & 0 & 1 & 1 \\
+  -1 & 1 & 0 & -1 \\
+  0 & 1 & 2 & -1 \\
+  0 & 2 & 3 & -1
+  \end{matrix}
+  \right.\left|\left.
+  \begin{matrix}
+  4 \\ 2 \\ 1 \\ 7 
+  \end{matrix}
+  \right)\right.
+  \xrightarrow{\text{R1}+\text{R2}\to\text{R2}} \\
+  & \left(
+  \begin{matrix}
+  1 & 0 & 1 & 1 \\
+  0 & 1 & 1 & 0 \\
+  0 & 1 & 2 & -1 \\
+  0 & 2 & 3 & -1
+  \end{matrix}
+  \right.\left|\left.
+  \begin{matrix}
+  4 \\ 6 \\ 1 \\ 7 
+  \end{matrix}
+  \right)\right.
+  \xrightarrow{\substack{\text{R3}-\text{R2}\to\text{R3} \\
+  \text{R4}-2\,\text{R2}\to\text{R4}}}
+  \left(
+  \begin{matrix}
+  1 & 0 & 1 & 1 \\
+  0 & 1 & 1 & 0 \\
+  0 & 0 & 1 & -1 \\
+  0 & 0 & 1 & -1
+  \end{matrix}
+  \right.\left|\left.
+  \begin{matrix}
+  4 \\ 6 \\ -5 \\ -5
+  \end{matrix}
+  \right)\right.
+  \xrightarrow{\text{R4}-\text{R3}\to\text{R4}} \\
+  & \left(
+  \begin{matrix}
+  1 & 0 & 1 & 1 \\
+  0 & 1 & 1 & 0 \\
+  0 & 0 & 1 & -1 \\
+  0 & 0 & 0 & 0
+  \end{matrix}
+  \right.\left|\left.
+  \begin{matrix}
+  4 \\ 6 \\ -5 \\ 0
+  \end{matrix}
+  \right)\right.
+  \xrightarrow{\substack{\text{R1}-\text{R3}\to\text{R1}\\
+  \text{R2}-\text{R3}\to\text{R2}}}
+  \left(
+  \begin{matrix}
+  1 & 0 & 0 & 2 \\
+  0 & 1 & 0 & 1 \\
+  0 & 0 & 1 & -1 \\
+  0 & 0 & 0 & 0
+  \end{matrix}
+  \right.\left|\left.
+  \begin{matrix}
+  9 \\ 11 \\ -5 \\ 0
+  \end{matrix}
+  \right)\right.
+\end{align*}
+
+
+\subsection*{Step 3: Zero, one, or many solutions?}
+
+There are two fundamentally different situations:
+\begin{itemize}
+\item The matrix $A$ is \emph{regular}.  In this case, the left-hand
+block of $M$ has been reduced to the identity matrix.  There is
+exactly one solution, independent of which vector $\bb$ you started out
+with. 
+
+\item The matrix $A$ is \emph{degenerate}.  In this case, the left-hand
+block of the row-reduced augmented matrix has more columns than
+non-zero rows.  Then, dependent on which vector $\bb$ you started out
+with, there is either no solution at all (the system is
+\emph{inconsistent}), or an infinite number of solutions (the system
+is \emph{underdetermined}).
+\end{itemize}
+If the rightmost column of the row-reduced augmented matrix has a
+nonzero entry in a row that is otherwise zero, the system is
+inconsistent.
+
+Otherwise, the general solution has the following structure.  It is
+the sum of a \emph{particular solution} of the \emph{inhomogeneous
+equation} $A\x=\bb$ and the \emph{general solution} of the
+\emph{homogeneous equation} $A\x=0$.
+
+\subsection*{Step 4: Write out the solution}
+
+\begin{itemize}
+\item If the left-hand block of the row-reduced matrix is not square,
+make it square by adding or removing rows of zeros.  This has to
+be done in such a way that the leading $1$ in each row (the
+\emph{pivot}) lies on the diagonal!
+\item The rightmost column of the row-reduced augmented matrix is a
+particular solution.
+\item To find a basis for the general solution of the homogeneous
+system, proceed as follows:  Take every column of the row-reduced
+augmented matrix that has a zero on the diagonal.  Replace that zero
+by $-1$.  The set of these column vectors is the basis you need.
+\end{itemize}
+In the example above, a particular solution is $(9, 11, -5, 0)^T$ and
+the general solution of the homogeneous equation is a one-dimensional
+subspace with basis vector $(2,1,-1,-1)^T$.  Therefore, the general
+solution to the inhomogeneous equation $A\x=\bb$ is the line
+\begin{equation*}
+  \x = 
+  \begin{pmatrix}
+    9 \\ 11 \\ -5 \\ 0
+  \end{pmatrix}
+  + \lambda
+  \begin{pmatrix}
+  2 \\ 1 \\ -1 \\ -1
+  \end{pmatrix} \,.
+\end{equation*}
+Another example:  Assume that the row-reduced matrix is
+\begin{equation*}
+  \left(
+  \begin{matrix}
+  0 & 0 & 1 & -3 & 0 & 4\\
+  0 & 0 & 0 & 0 & 1 & 6 
+  \end{matrix}
+  \right.\left|\left.
+  \begin{matrix}
+  -3 \\ 7
+  \end{matrix}
+  \right)\right.\,.
+\end{equation*}
+Padding the matrix with the required rows of zeros gives
+\begin{equation*}
+  \left(
+  \begin{matrix}
+  0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & 0 & 1 & -3 & 0 & 4\\
+  0 & 0 & 0 & 0 & 0 & 0 \\
+  0 & 0 & 0 & 0 & 1 & 6 \\
+  0 & 0 & 0 & 0 & 0 & 0   
+  \end{matrix}
+  \right.\left|\left.
+  \begin{matrix}
+  0 \\ 0 \\ -3 \\ 0 \\ 7 \\ 0
+  \end{matrix}
+  \right)\right.\,,
+\end{equation*}
+and the general solution is
+\begin{equation*}
+  \x =
+  \begin{pmatrix}
+  0 \\ 0 \\ -3 \\ 0 \\ 7 \\ 0
+  \end{pmatrix}
+  + \lambda_1
+  \begin{pmatrix}
+  -1 \\ 0 \\ 0 \\ 0 \\ 0 \\ 0
+  \end{pmatrix}
+  + \lambda_2
+  \begin{pmatrix}
+  0 \\ -1 \\ 0 \\ 0 \\ 0 \\ 0 
+  \end{pmatrix}
+  + \lambda_3
+  \begin{pmatrix}
+  0 \\ 0 \\ -3 \\ -1 \\ 0 \\ 0 
+  \end{pmatrix}
+  + \lambda_4
+  \begin{pmatrix}
+  0 \\ 0 \\ 4 \\ 0 \\ 6 \\ -1
+  \end{pmatrix}  \,.
+\end{equation*}
+
+
+\subsection*{Step 5: Check your solution}
+
+By multiplying $A$ with the vectors representing the solution, you can
+easily verify that the computation is correct.  In our example,
+\begin{gather*}
+  A \begin{pmatrix}
+    9 \\ 11 \\ -5 \\ 0
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+  0 & 1 & 2 & -1 \\
+  1 & 0 & 1 & 1 \\
+  -1 & 1 & 0 & -1 \\
+  0 & 2 & 3 & -1
+  \end{pmatrix}
+  \begin{pmatrix}
+    9 \\ 11 \\ -5 \\ 0
+  \end{pmatrix}
+  = \begin{pmatrix}
+  1 \\ 4 \\ 2 \\ 7 
+  \end{pmatrix} =\b \,, \\
+  A \begin{pmatrix}
+  2 \\ 1 \\ -1 \\ -1
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+  0 & 1 & 2 & -1 \\
+  1 & 0 & 1 & 1 \\
+  -1 & 1 & 0 & -1 \\
+  0 & 2 & 3 & -1
+  \end{pmatrix}
+  \begin{pmatrix}
+  2 \\ 1 \\ -1 \\ -1
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+  0\\0\\0\\0
+  \end{pmatrix} \,.  
+\end{gather*}
+

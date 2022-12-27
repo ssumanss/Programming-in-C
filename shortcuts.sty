@@ -1,0 +1,98 @@
+%%%%% Library for graphs and diagrams
+\usepackage{tikz, pgfplots}   
+\pgfplotsset{compat=1.17}
+\usetikzlibrary{cd}
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{decorations.pathreplacing}
+\tikzset{
+    set arrow inside/.code={\pgfqkeys{/tikz/arrow inside}{#1}},
+    set arrow inside={end/.initial=>, opt/.initial=},
+    /pgf/decoration/Mark/.style={
+        mark/.expanded=at position #1 with
+        {
+            \noexpand\arrow[\pgfkeysvalueof{/tikz/arrow inside/opt}]{\pgfkeysvalueof{/tikz/arrow inside/end}}
+        }
+    },
+    arrow inside/.style 2 args={
+        set arrow inside={#1},
+        postaction={
+            decorate,decoration={
+                markings,Mark/.list={#2}
+            }
+        }
+    },
+}
+\usetikzlibrary{calc}
+\usepackage[most]{tcolorbox}
+\usepackage{xcolor}
+\usepackage{cancel}
+%%%% 
+\usepackage{chemmacros}
+\usepackage{textalpha}
+%%%% hperref
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+    
+%%%%% header and footer
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\texttt{\rightmark}}
+\lhead{\href{https://sandeepsuman.com}{\texttt{SANDEEP SUMAN}}}
+\rfoot{Page \thepage}
+%% 
+% Environments for theorems, lemmas, etc.:
+\usepackage{multicol}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{thmtools}
+\declaretheoremstyle[bodyfont=\normalfont]{normalbody}
+\usepackage{esint}
+\newtheorem{theorem}{Theorem}
+% \newtheorem{note}{Note}
+\declaretheorem[style=normalbody,name=Note]{note}
+\declaretheorem[style=normalbody,name=Remark]{remark}
+\newtheorem{preposition}[theorem]{Preposition}
+\newtheorem{Lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}{Definition}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{fact}{Fact}[theorem]
+\newtheorem{rule-def}[theorem]{Rule}
+\newtheorem{example}{Example}
+\newtheorem{Proof}{Proof}
+\newtheorem{statement}{Statement}
+\newtheorem{question}{Question}
+\newtheorem{case}{Case}
+\newtheorem{result}{Result}
+%% Watermark 
+\usepackage{draftwatermark}
+\SetWatermarkText{\textsc{Draft}}
+\SetWatermarkScale{1}
+\SetWatermarkColor[gray]{0.95}
+%%%%
+%%%%%% custom symbols 
+\newcommand{\x}{\boldsymbol{x}}
+\newcommand{\y}{\boldsymbol{y}}
+\renewcommand{\a}{\boldsymbol{a}}
+\newcommand{\bb}{\boldsymbol{b}}
+\renewcommand{\c}{\boldsymbol{c}}
+\newcommand{\img}{\operatorname{Im}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\norm}[1]{\vert \vert #1 \vert \vert}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\nullity}{\operatorname{nullity}}
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+
+
+

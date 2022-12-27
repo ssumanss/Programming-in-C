@@ -1,0 +1,78 @@
+\documentclass{book}
+\usepackage{shortcuts}
+
+\title{Programming in C}
+\newcommand{\booksubtitle}{Elective Paper of MSc Mathematics in Bihar}
+\newcommand{\booklicense}{Creative Commons Zero 1.0 Universal}
+
+\author{Sandeep Suman}
+% Author title could be a university or a geographical location, for example
+\newcommand{\authorsubtitle}{TMBU, Bhagalpur}
+
+% Create convenient commands \booktitle and \bookauthor
+\makeatletter
+\newcommand{\booktitle}{\@title}
+\newcommand{\bookauthor}{\@author}
+\makeatother
+
+% This utf8 declaration is not needed for versions of latex > 2018 but may
+% be helpful for older software. Eventually, it may not be worth keeping.
+\usepackage[utf8]{inputenc}  
+\usepackage{tgschola}
+\usepackage{fix-cm}  % this package allows large \fontsize
+
+
+% The following dimensions specify 4.75" X 7.5" content on 6 3/8" by 9 1/4"
+% paper. The paper width and height can be tweaked as required and the content
+% should size to fit within the margins accordingly.
+%
+% The (inside) bindingoffset should be larger for books with more pages. Some
+% standard recommended sizes are .375in minimum up to 1in for 600+ page books.
+% Sizes .75in and .875in are also recommended roughly at 150 and 400 pages.
+\usepackage[bindingoffset=0.625in,
+            left=.5in, right=.5in,
+            top=.8125in, bottom=.9375in,
+            paperwidth=6.375in, paperheight=9.25in]{geometry}
+% Here is an alternative geometry for reading on letter size paper:
+% \usepackage[margin=.75in, paperwidth=8.5in, paperheight=11in]{geometry}
+
+\renewcommand{\contentsname}{Table of Contents} % default is {Contents}
+\usepackage{makeidx}
+\makeindex % Initialize an index
+
+\usepackage{wrapfig, blindtext}
+\usepackage{enumerate}
+%%%%%% list of theorems
+
+
+% Content Starts Here
+\begin{document}
+\frontmatter
+\input{half-page-title}
+% No page numbers on the Frontispiece page
+\thispagestyle{empty}
+\input{title-page}
+% Do not show page numbers on colophon page
+\thispagestyle{empty}
+\begin{flushleft}
+\vspace*{\fill}
+This book was updated on \today.\\
+\vspace{\fill}
+Copyright \textcopyright{} \the\year{}  \bookauthor\\
+License: \booklicense 
+\end{flushleft}
+% A title page resets page # to 1, but the second title page
+% was actually page 3. So add two to the page counter.
+\addtocounter{page}{2}
+\input{preface}
+% Three-level Table of Contents
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\mainmatter
+\input{introduction.tex}
+
+\backmatter
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+\end{document}

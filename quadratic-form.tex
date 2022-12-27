@@ -1,0 +1,234 @@
+\chapter{Quadratic Form}
+
+\section{Quadratic Form}
+\begin{definition}
+Let $H:V\times V \to \mathbb{R}$ be a symmetric bilinear form then the function $K:V\to \mathbb{R}$ such that $K(v)=H(v,v)$ is called the quadratic form assosiated with $H$.
+\end{definition}
+
+\begin{example}
+Homogeneous $2-degree$ polynomials 
+$$f(x_1,x_2,\dots,x_n)=\sum_{i=j}a_{ij}x_ix_j$$
+$$f(x,y)=ax^{2}+bxy+cy^{2}$$
+$$\left[x,y\right]\left[\begin{array}{cc}
+    a &b/2  \\
+     b/2& c
+\end{array}\right]\left[\begin{array}{c}
+     x  \\
+     y 
+\end{array}\right]$$
+$$H(x,y=X^{T}AY)\to~~symmetric$$
+\begin{align*}
+    f(x_1,x_2,\dots,x_n)&=\sum_{i\leq j} a_{ij} x_i x_j\\
+    \left[x_1,\dots,x_n\right]&\left[\begin{array}{cccc}
+         a_{11}& a_{12}&\dots&a_{1n} \\
+         a_{21}&a_{22}&\dots&a_{2n}\\
+         \vdots&\vdots& \ddots& \vdots\\
+         a_{n1}&\dots&\dots&a_{nn}
+    \end{array}\right] \left[\begin{array}{c}
+         x_1  \\
+         x_2\\
+         \vdots\\
+         x_n
+    \end{array}\right] 
+     \end{align*}
+    \begin{align*}
+        f(x_1,x_2,\dots,x_n)&=\sum_{i\leq j} a_{ij} x_i x_j\\
+        &=\begin{cases}
+        a_{ij}& i=j\\
+        \frac{a_{ij}}{2}& i\neq j
+        \end{cases}
+   \end{align*}
+\end{example}
+\begin{example}
+Write the following bilinear form in matrix form
+\begin{align*}
+    f(x,y,z)&=x^{2}+2xy+y^{2}+4yz+5z^{2}+6xz\\
+&=\left[\begin{array}{ccc}x&y&z\end{array}\right] 
+\left[\begin{array}{ccc}
+     1&1&3\\1&1&2\\3&2&5
+\end{array}\right] \left[\begin{array}{c}
+     x\\y\\z
+\end{array}\right] 
+\end{align*}
+\end{example}
+\begin{theorem}
+If $K$ is a quadratic form on a vector space $V$ over $\mathbb{R}$ and $H$ is the bilinear form then for all $u,v \in V$ 
+$$H(u,v)=\frac{1}{2}\left[K(u+v)-K(u)-K(v)\right]$$ 
+\end{theorem}
+\begin{proof}
+For all $u,v\in V$, we have
+consider $H$ is symmetric bilinear form
+\begin{align*}
+    K(u)&=H(u,u)\quad K(v)=H(v,v)\\
+    K(u+v)&=H(u+v,u+v)\\
+    &=H(u,u+v)+H(v,u+v)\\
+    &=H(u,u)+H(u,v)+H(v,u)+H(v,v)\\
+    &=K(u)+H(u,v)+H(v,u)+K(v)\\
+    &=K(u)+k(v)+2H(u,v)\\
+    2H(u,v)&=K(u+v)-k(u)-k(v)\\
+    \therefore~ H(u,v)&=\frac{1}{2}\left[K(u+v)-K(u)-K(v)\right] 
+\end{align*}
+Hence proved.
+\end{proof}
+
+\begin{example}
+Find the bilinear form corresponding to the quadratic form given by 
+$$K:\mathbb{R}^{2}\to \mathbb{R}$$
+$$K(x,y)=ax^{2}+bxy+cy^{2}$$
+Let $\x,\y\in \R^2$, then consider 
+$$\x=(x_1,y_1),\quad \y=(y_1,y_2)$$
+\begin{align*}
+    2H(\x,\y)&=K(x_1+y_1,x_2+y_2)-K(x_1,x_2)-K(y_1,y_2)\\
+    2H(\x,\y)&=a(x_1+y_1)^{2}+b(x_1+y_1)(x+y_2)+c(x_2+y_2)^{2}\\
+    &\phantom{abc}-\left\{ax_1^{2}+bx_1x_2+cx_{2}^{2}\right\}-(ay_{1}^{2}+by_1y_2+cy_2^{2})\\
+    &=2ax_1y_1+b\{x_1x_2+x_1y_2+y_1x_2+y_1y_2\}+2cx_2y_2-\left\{bx_1x_2+by_1y_2\right\} \\
+    &=2ax_{1}y_1+b\{x_1y_2+x_2y_1\}+2x_{2}y_{2}\\
+    \therefore ~H(\x,\y)&=ax_{1}y_1+\frac{b}{2}\left(x_1y_2+x_2y_1\right) +cx_{2}y_{2}
+\end{align*}
+Now, we want to find matrix w.r.to bilinear form $H.$ using standard basis. We know that the matrix is given by $A=[a_{ij}]$ where 
+$$a_{ij}=H(v_i,v_j),\quad \text{ where }v_1,\ldots,v_n\text{ is a bisis of }V$$
+Here the basis of $\mathbb{R}^{2}$ is $\left\{(1,0),(0,1)\right\}$
+Strandard basis\\
+\begin{align*}
+    e_1=(1,0) \quad e_2=(0,1)
+\end{align*}
+Now the matrix is calculated as,
+\begin{align*}
+    a_{11}&=H(e_1,e_1) & a_{12} &=H(x_1,x_1)\\
+    &=H\left\{\left(\begin{array}{c}
+         1\\0
+    \end{array}\right),\left(\begin{array}{c}
+         0\\1 
+    \end{array}\right)\right\} &&=H\left\{\left(\begin{array}{c}
+         1  \\
+         0
+    \end{array}\right),\left(\begin{array}{c}
+         0  \\
+         1 
+    \end{array}\right)\right\}\\
+    &=a\cdot 1+\frac{b}{2}(0+0)+c\cdot 0=a &&=a\cdot 0+\frac{b}{2} (0+1)+c\times 0 =b/2\\[2em]
+    a_{21}&=H(x_2,x_1)&a_{22}&=H(x_1,x_2)\\
+    &=H\left\{\left(\begin{array}{c}
+         0\\1
+    \end{array}\right),\left(\begin{array}{c}
+         1\\0 
+    \end{array}\right)\right\}&&=H\left\{\left(\begin{array}{c}
+         0\\1
+    \end{array}\right),\left(\begin{array}{c}
+         0\\1 
+    \end{array}\right)\right\}\\
+    &=a\cdot 0+\frac{b}{2}(0+0)+c\times 1 &&=a\times 0+\frac{b}{2}(0+0)+c\times 1=c
+=c
+\end{align*}
+Hence, the matrix is 
+\begin{align*}
+     A&=\left[\begin{array}{cc}
+        a &b/2  \\
+         b/2&c 
+    \end{array}\right] 
+\end{align*}
+Which is equal to matrix of quadratic form.
+\end{example}
+\begin{theorem}
+The eigenvalue of Hermitian matrix is real.
+\end{theorem}
+\begin{proof}
+Let $\lambda$ is any eigenvalue of $A$, then there exist $v\in \C^n$, $v\neq 0$, such that, 
+\begin{align}\nonumber
+    Av&=\lambda v\\\nonumber
+    \intertext{Multiplying left sides by, $v^*$}
+    v^{*}Av&=v^{*}\lambda v\\\nonumber
+     v^{*}Av&=\lambda (v^{*}v)\\\label{f53.1}
+     v^{*}Av&=\lambda \norm{v} \\
+     \lambda &= \frac{v^{*}Av}{\norm{v}}
+\end{align}
+Now, taking conjugate in equation \ref{f53.1}, we get
+\begin{align*}
+    (v^{*}Av)^{*}&=\left[\lambda (v^{*}v)\right]^{*}\\
+    v^{*}A^{*}(v^{*})^{*}&=\overline{\lambda}(v)^{*}(v^{*})^{*}\\
+    \intertext{$A$ is Hermition, then  $A^{*}=A$}
+    v^{*}Av&=\overline{\lambda}v^{*}v\\
+    v^{*}Av&=\overline{\lambda}\norm{v}\\
+    \overline{\lambda} &= \frac{v^{*}Av}{\norm{v}}
+\end{align*}
+Therefore, 
+$$\lambda = \overline{\lambda}$$
+Thus the eigenvalue of Hermition matrix is real.
+\end{proof}
+\newpage 
+\section{Sylvester's Theorem}
+\begin{theorem}[Sylvester's Theorem\index{Sylvester's theorem}]
+Let $H:V\times V\to \mathbb{R}$ is a symmetric bilinear form then the number of positive diagonal entries and then number of negative diagonal entries in any diagonal matrix representation of $H$ will be the same.
+\end{theorem}
+\begin{proof}
+Let $\alpha, \beta $ are any two basis of $V$, such that matrix of $H$ is diagonal say $A$ and $B.$ 
+
+\medskip \noindent Let $r$ be the rank of matrix. Let $p$ be the number of positive entries  entries of $A$ and $q$ be the number of positive entries of $B$. Assume that $p\neq q$, without any loss of generality, we can assume $p<q$. Let
+\begin{align*}
+    \alpha&=\{v_1,v_2,\dots,v_q,\dots,v_r,\dots,v_n\}\\
+    \beta &=\{w_1,w_2,\dots,w_q,\dots w_r,\dots,w_n\}
+\end{align*}
+Let us defined a function 
+\begin{align*}
+    L:V&\to R^{p+r-q}\\
+    x&\mapsto \left (H(x_1,v_1),\dots,H(x,v_{p}),H(x,w_{q+1}),\dots, H(x,w_r)\right)
+\end{align*}
+Then the $\rank(L)\leq p+r-q$, adding $\nullity(L)$ on both sides, we get
+\begin{align*}
+    \rank(L)+\nullity(L)&\leq (p+r-q)+\nullity(L)\\ 
+    n &\leq (p+r-q)+\nullity(L)\\
+    \nullity(L)&\geq n-(p+r-q)>n-r\\
+    &\geq n-r+(q-p) \\
+    &> n-r \quad [~q>p~]
+\end{align*}
+Then, there exist a vector $v_{0}\in \langle v_1,v_2,\dots,v_r \rangle$, $v_0\neq 0$
+such that $L(v_0)=0$
+\begin{align}\label{f55.1}
+    \begin{cases}
+    H(v_0,v_i)=0, & 1\leq i\leq p\\
+    H(v_0,w_i)=0, & q< i\leq r
+    \end{cases}
+\end{align}
+Since $v_0\in V$, we can write it as linear combination of $\alpha$ and $\beta$,
+$$v_0=\sum_{i=1}^{n}a_{i}v_{i}=\sum_{j=1}^{n}b_jw_j$$
+Consider, for all $i\leq p$, we have
+\begin{align*}
+    H(v_0,v_i)
+    &=H\! \left ( \sum_{j=1}^{n}a_{j}v_{j}, v_i\right )\\
+    &=\sum_{j=1}^{n} a_{j}H(v_j,v_i)
+    \intertext{For $i\neq j$, $a_{ij} = H(v_i,v_j)=0$, hence}
+    &=a_{i} H(v_i,v_i)
+    \intertext{But for $i\leq p$, $H(v_0, v_i) = 0$}
+    0&=a_{i} H(v_i,v_i)
+    \intertext{But $H(v_i,v_i)> 0$, for $i\leq p$, hence}
+    a_i&=0 
+\end{align*}
+Similarly $b_i=0$ for $q< i$
+\begin{align*}
+    H(v_0,v_0)
+    &=H\! \left (\sum_{i=1}^{n}a_iv_i, \sum_{j=1}^{n}a_{j}v_{j}\right )\\
+    &=\sum_{i=1}^{n} a_{i}\!\left [H\!\left (v_i,\sum_{j=1}^{n} a_{j}v_{j}\right)\right]\\
+    &=\sum_{i=1}^{n} \sum_{j=1}^{n} a_{i}a_{j}H(v_i,v_j)\\
+    \intertext{For $i\neq j$, $a_{ij} = H(v_i,v_j)=0$, hence}
+    &=\sum_{i=1}^{n} a_{i}^{2}H(v_i,v_i)\\
+    \therefore H(v_0,v_0)&=\sum_{i=1}^{r}a_{i}^{2}H(v_i,v_i)\\
+    \intertext{Similarly, for $\beta$, we get}
+    H(v_0,v_0)&=\sum_{i=i}^{r}b_i^{2}H(w_i,w_i)\\
+    \intertext{But $a_i=0$, $i\leq p$, we get}
+\end{align*}
+\begin{align*}
+    Now,~~~H(v_0,v_0)&=H(v_0,\sum_{i=1}^{n}a_iv_i)\\
+    &=\sum_{i=1}^{n}a_{i} H(v_0,v_i)\\
+    &=\sum_{i=p+1}^{n}a_{i}H(v_0,v_i)~~\text{(By choice of $v_0$)}\\
+    &=\sum_{i=p+1}^{n}a_{i}H\left(\sum_{j=1}^{n}a_jv_j,v_i\right)\\
+    &=\sum_{i=P+1}a_{i}^{2}H(v_i,v_i)\\
+    &=\sum_{i=p+1}^{n}a_{i}^{2}H(v_i,v_i)<0\\
+    H(v_0,v_0)&=\sum_{j=1}^{n}b_{j}^{2}H\\
+    H(v_0,v_0)&=H(v_0,\sum_{j=1}^{n}b_iw_i)\\
+    &=\sum_{i=1}^{q}b_iH(v_0,w_i)\\
+    &=\sum_{i=1}^{q} b_{i}^{2}H(w_i,w_i)>0
+\end{align*}
+This is contradiction. So our assumption $p\neq q$ is wrong, hence 
+$$p=q$$
+Hence the theorem is correct.
+\end{proof}
